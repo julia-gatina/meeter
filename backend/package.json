@@ -1,0 +1,46 @@
+{
+  "name": "meeter-api",
+  "version": "0.0.1",
+  "description": "A meeter backend server",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha.js --reporter spec",
+    "start": "DB_USERNAME=meeter DB_PASSWORD=meeter DB_PORT=5430 DB_NAME=meeter node index.js",
+    "start:nodemon": "DB_USERNAME=meeter DB_PASSWORD=meeter DB_PORT=5430 PORT=8080 DB_NAME=meeter ./node_modules/.bin/nodemon --watch server -e js index.js",
+    "format:fix": "pretty-quick --staged",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "author": "Julia Gatina",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.0.2",
+    "express": "^4.13.4",
+    "fs": "0.0.1-security",
+    "md5": "^2.1.0",
+    "path": "^0.12.7",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.5.2"
+  },
+  "devDependencies": {
+    "@prettier/plugin-xml": "^2.2.0",
+    "chai": "^4.3.7",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.2",
+    "mocha": "^10.1.0",
+    "node-liquibase": "^4.1.1",
+    "nodemon": "^1.9.2",
+    "npm-run-all": "^4.1.5",
+    "pg": "^8.8.0",
+    "prettier": "^2.8.1",
+    "pretty-quick": "^3.1.3",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0",
+    "uuid": "^9.0.0"
+  }
+}
