@@ -1,0 +1,46 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+>
+
+  <changeSet author="jgatina" id="populate-mentor-table">
+
+    <!-- add test mentor data -->
+    <insert tableName="mentor">
+      <column name="id" value="f9613152-50db-4b3c-b9b2-e261efb486f3" />
+      <column name="name" value="Jona Moore" />
+      <column name="email" value="jona.moore@meeter.com" />
+      <column name="title" value="Chief Technology Officer" />
+      <column name="company" value="MetaLab" />
+      <column name="experience" value="20" />
+      <column name="expertise" value="Strategic Development, Building Influence and Business Innovation" />
+    </insert>
+
+    <insert tableName="mentor">
+      <column name="id" value="ccb9f966-a7fd-4aff-b66b-ce99d98dce49" />
+      <column name="name" value="Stephanie Redivo" />
+      <column name="email" value="stephanie.redivo@meeter.com" />
+      <column name="title" value="Diversity, Equity and Inclusion Lead" />
+      <column name="company" value="Translink" />
+      <column name="experience" value="15" />
+      <column name="expertise" value="Inclusive Leadership, Public Speaking, Change Management and Data Analysis" />
+    </insert>
+
+    <insert tableName="mentor">
+      <column name="id" value="c8371c1f-6113-4df6-9e20-f0a556223122" />
+      <column name="name" value="Sonia Singh" />
+      <column name="email" value="sonia.singh@meeter.com" />
+      <column name="title" value="Senior Account Executive" />
+      <column name="company" value="Amazon Web Services" />
+      <column name="experience" value="12" />
+      <column
+        name="expertise"
+        value="Tech Advancement, Skills Development, Stepping into Leadership and Business Communications"
+      />
+    </insert>
+
+  </changeSet>
+
+</databaseChangeLog>
