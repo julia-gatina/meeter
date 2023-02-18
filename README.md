@@ -2,7 +2,7 @@
 Meeting scheduler application for mentors and mentees.
 Used technologies (Postgres, Express, React, Node).
 
-# Meeter build and getting start application
+# Meeter build and start application
 1. Run Postgres DB through Docker env 
 ```
   docker-compose up
