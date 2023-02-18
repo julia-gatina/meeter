@@ -22,6 +22,8 @@ npm run start:nodemon
 ```
 4. Swagger API Doc are available at http://localhost:{port}/api/docs
 ## View API calls executed in Swagger:
+_**Use a CTRL+click (on Windows and Linux) or CMD+click (on MacOS) to open video in the new tab._**
+
 [<img src="frontend/public/mentor_api.png">](https://watch.screencastify.com/v/sXpJrzGhPZD0ivcz74qa "Mentor APIs")
 
 [<img src="frontend/public/mentee_api.png">](https://watch.screencastify.com/v/mGVxp3pliyFvPg2xav1E "Mentee APIs")
