@@ -35,5 +35,53 @@ module.exports = function () {
       .catch(apiErrorHandler(res));
   });
 
+  /**
+   * @openapi
+   * /api/mentor/{id}:
+   *  get:
+   *     tags:
+   *     - Mentors
+   *     summary: Gets a mentor
+   *     description: Returns a mentor
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: Mentor id
+   *        required: true
+   *        schema:
+   *          type: string
+   *     responses:
+   *       200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/MentorResponseDto'
+   *       500:
+   *        description: Internal server error
+   *       404:
+   *        description: Not found
+   *       400:
+   *        description: invalid request no ID in request
+   */
+  meeterRoutes.get('/mentor/:id', function (req, res) {
+    const mentorId = req.params.id;
+    if (!mentorId) {
+      res.status(400).json({ error: 'invalid request: no mentor ID in GET request' });
+      return;
+    }
+
+    mentorService
+      .getMentorById(mentorId)
+      .then((mentor) => {
+        if (mentor) {
+          res.status(200).json(mentor);
+        } else {
+          res.sendStatus(404);
+        }
+      })
+      .catch(apiErrorHandler(res));
+  });
+
   return meeterRoutes;
 };

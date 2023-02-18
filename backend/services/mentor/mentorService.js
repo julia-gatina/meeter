@@ -11,6 +11,13 @@ const findAll = async () => {
 };
 
 /**
+ * Get a mentor by id
+ */
+const getMentorById = async (id) => {
+  return await mentorRepository.getMentorById(id);
+};
+
+/**
  * Create new Mentor
  */
 const create = async (newMentor) => {
@@ -20,5 +27,6 @@ const create = async (newMentor) => {
 
 module.exports = {
   findAll,
+  getMentorById,
   create
 };
