@@ -2,3 +2,7 @@
 
 # IntelliJ config
 /.idea/
+
+# backend
+/backend/node_modules/
+/backend/package-lock.json

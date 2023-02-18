@@ -24,6 +24,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// Routes
+const meeterRoutes = require('./routes/meeter')();
+
+// Mount the backend routes at the "/api" path prefix:
+app.use('/api', meeterRoutes);
+
 app.listen(envVar.SERVER_PORT, () => {
-  log.info('Meeter backend listening on port ' + envVar.SERVER_PORT);
+  log.info('Meeter backend listening on port: ' + envVar.SERVER_PORT);
 });
