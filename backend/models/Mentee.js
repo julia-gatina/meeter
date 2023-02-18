@@ -46,5 +46,12 @@ module.exports = (sequelize) => {
       timestamps: false
     }
   );
+
+  Mentee.associate = (models) => {
+    Mentee.hasMany(models['Meeting'], {
+      foreignKey: 'mentee_id'
+    });
+  };
+
   return Mentee;
 };

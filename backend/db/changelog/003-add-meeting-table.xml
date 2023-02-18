@@ -1,0 +1,44 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+>
+
+  <changeSet author="jgatina" id="add-meeting-table">
+
+    <!-- mentee create table -->
+    <createTable tableName="meeting">
+      <column name="id" type="VARCHAR(255)">
+        <constraints primaryKey="true" />
+      </column>
+      <column name="mentor_id" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="mentee_id" type="VARCHAR(255)">
+        <constraints
+          nullable="false"
+          foreignKeyName="fk_meeting_mentee"
+          referencedTableName="mentee"
+          referencedColumnNames="id"
+        />
+      </column>
+      <column name="appointment" type="TIMESTAMP" remarks="Date when meeting was created.">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_at" type="TIMESTAMP" remarks="Date when meeting was created.">
+      </column>
+    </createTable>
+
+    <!-- add test meeting data -->
+    <insert tableName="meeting">
+      <column name="id" value="3dfae39f-29ba-4885-86ea-cd502923e81f"/>
+      <column name="mentor_id" value="ccb9f966-a7fd-4aff-b66b-ce99d98dce49"/>
+      <column name="mentee_id" value="080edab4-b7e8-44e1-bda4-fc4376d6dd94"/>
+      <column name="appointment" value="2024-01-12 12:45:00"/>
+      <column name="created_at" value="2022-01-10 2:13:00"/>
+    </insert>
+
+  </changeSet>
+
+</databaseChangeLog>

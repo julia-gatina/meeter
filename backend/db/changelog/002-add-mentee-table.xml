@@ -10,7 +10,7 @@
     <!-- mentee create table -->
     <createTable tableName="mentee">
       <column name="id" type="VARCHAR(255)">
-        <constraints nullable="false" />
+        <constraints primaryKey="true"/>
       </column>
       <column name="name" type="VARCHAR(255)">
         <constraints nullable="false" />
