@@ -6,5 +6,6 @@
 
   <!--Initial setup -->
   <include file="db/changelog/000-initial-db.xml"/>
+  <include file="db/changelog/001-populate-mentor-table.xml"/>
 
 </databaseChangeLog>
