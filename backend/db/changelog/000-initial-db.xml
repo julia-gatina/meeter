@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+  <changeSet author="jgatina" id="initial-db-set">
+
+    <!-- mentor create table -->
+    <createTable tableName="mentor">
+      <column name="id" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="email" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="title" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="company" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="experience" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="expertise" type="VARCHAR(255)" />
+    </createTable>
+
+  </changeSet>
+
+</databaseChangeLog>
