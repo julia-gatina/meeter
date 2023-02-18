@@ -1,6 +1,8 @@
 'use strict';
 
 const meetingService = require('../services/meeting/meetingService');
+const mentorService = require('../services/mentor/mentorService');
+const menteeService = require('../services/mentee/menteeService');
 const { apiErrorHandler } = require('../utils/common-utils');
 const express = require('express');
 const meetingRoutes = express.Router();
@@ -81,6 +83,79 @@ module.exports = function () {
         }
       })
       .catch(apiErrorHandler(res));
+  });
+
+  /**
+   * @openapi
+   * /api/meeting:
+   *  post:
+   *     tags:
+   *     - Meetings
+   *     summary: Create new a Meeting
+   *     description: Create new a Meeting
+   *     requestBody:
+   *         description: Create a new Meeting
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/PostMeetingRequestDto'
+   *         required: true
+   *     responses:
+   *       200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/MeetingResponseDto'
+   *       500:
+   *        description: Internal server error
+   *       400:
+   *        description: Invalid request
+   */
+  meetingRoutes.post('/', async function (req, res) {
+    const meetingDto = req.body;
+    if (!meetingDto) {
+      res.status(400).json({ error: 'invalid request: no meeting data in POST body' });
+      return;
+    }
+
+    let mentorId = meetingDto.mentorId;
+    if (!mentorId) {
+      res.status(400).json({ error: 'invalid request: no mentorId' });
+      return;
+    }
+
+    const mentorById = await mentorService.getMentorById(mentorId);
+    if (!mentorById) {
+      res.status(400).json({ error: 'Mentor with mentorId does not exist' });
+      return;
+    }
+
+    const menteeId = meetingDto.menteeId;
+    if (!menteeId) {
+      res.status(400).json({ error: 'invalid request: no menteeId' });
+      return;
+    }
+
+    const menteeById = await menteeService.getMenteeById(menteeId);
+    if (!menteeById) {
+      res.status(400).json({ error: 'Mentee with menteeId does not exist' });
+      return;
+    }
+
+    if (!meetingDto.appointment) {
+      res.status(400).json({ error: 'invalid request: no appointment' });
+      return;
+    }
+
+    meetingService
+      .create(meetingDto)
+      .then((savedMeeting) => {
+        res.status(200).json(savedMeeting);
+      })
+      .catch((error) => {
+        res.status(500).json({ error: error.message });
+      });
   });
 
   return meetingRoutes;
