@@ -25,7 +25,7 @@ const options = {
       }
     ]
   },
-  apis: ['./routes/meeter.js', './tools/swagger/schemas/*.js']
+  apis: ['./routes/meeter.js', './routes/test.js', './tools/swagger/schemas/*.js']
 };
 
 const swaggerSpec = swaggerJsdoc(options);

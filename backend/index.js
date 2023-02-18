@@ -37,9 +37,11 @@ swagger.initialize(app, envVar.SERVER_PORT);
 
 // Routes
 const meeterRoutes = require('./routes/meeter')();
+const testRoutes = require('./routes/test')();
 
 // Mount the backend routes at the "/api" path prefix:
 app.use('/api', meeterRoutes);
+app.use('/api', testRoutes);
 
 app.listen(envVar.SERVER_PORT, () => {
   log.info('Meeter backend listening on port: ' + envVar.SERVER_PORT);

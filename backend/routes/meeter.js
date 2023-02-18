@@ -1,36 +1,86 @@
 'use strict';
 
+const mentorService = require('../services/mentor/mentorService');
+const { apiErrorHandler } = require('../utils/common-utils');
 const express = require('express');
 const meeterRoutes = express.Router();
 
 module.exports = function () {
   /**
    * @openapi
-   * /api/healthcheck:
+   * /api/mentor/all:
    *  get:
    *     tags:
-   *     - Healthcheck
-   *     summary: Checks if the app is up and running
-   *     description: Responds if the app is up and running
+   *     - Mentors
+   *     summary: Gets all mentors
+   *     description: Return all mentors
    *     responses:
    *       200:
-   *         description: App is up and running
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              type: array
+   *              items:
+   *                $ref: '#/components/schemas/MentorResponseDto'
+   *       500:
+   *        description: Internal server error
    */
-  meeterRoutes.get('/healthcheck', (req, res) => res.sendStatus(200));
+  meeterRoutes.get('/mentor/all', function (req, res) {
+    mentorService
+      .findAll()
+      .then((mentors) => {
+        res.status(200).json(mentors);
+      })
+      .catch(apiErrorHandler(res));
+  });
 
   /**
    * @openapi
-   * /api/test:
+   * /api/mentor/{id}:
    *  get:
    *     tags:
-   *     - Healthcheck
-   *     summary: Simple test Get endpoint
+   *     - Mentors
+   *     summary: Gets a mentor
+   *     description: Returns a mentor
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: Mentor id
+   *        required: true
+   *        schema:
+   *          type: string
    *     responses:
    *       200:
-   *         description: Test response text
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/MentorResponseDto'
+   *       500:
+   *        description: Internal server error
+   *       404:
+   *        description: Not found
+   *       400:
+   *        description: invalid request no ID in request
    */
-  meeterRoutes.get('/test', function (req, res) {
-    res.status(200).send({ message: 'Test API works!' });
+  meeterRoutes.get('/mentor/:id', function (req, res) {
+    const mentorId = req.params.id;
+    if (!mentorId) {
+      res.status(400).json({ error: 'invalid request: no mentor ID in GET request' });
+      return;
+    }
+
+    mentorService
+      .getMentorById(mentorId)
+      .then((mentor) => {
+        if (mentor) {
+          res.status(200).json(mentor);
+        } else {
+          res.sendStatus(404);
+        }
+      })
+      .catch(apiErrorHandler(res));
   });
 
   return meeterRoutes;
