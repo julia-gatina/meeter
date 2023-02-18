@@ -36,11 +36,15 @@ app.use(express.static('public'));
 swagger.initialize(app, envVar.SERVER_PORT);
 
 // Routes
-const meeterRoutes = require('./routes/meeter')();
+const mentorRoutes = require('./routes/mentor')();
+const menteeRoutes = require('./routes/mentee')();
+const meetingRoutes = require('./routes/meeting')();
 const testRoutes = require('./routes/test')();
 
 // Mount the backend routes at the "/api" path prefix:
-app.use('/api', meeterRoutes);
+app.use('/api/mentor', mentorRoutes);
+app.use('/api/mentee', menteeRoutes);
+app.use('/api/meeting', meetingRoutes);
 app.use('/api', testRoutes);
 
 app.listen(envVar.SERVER_PORT, () => {
