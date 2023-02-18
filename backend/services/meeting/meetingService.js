@@ -23,6 +23,13 @@ const getById = async (id) => {
 /**
  * Create new Meeting
  */
+const deleteById = (id) => {
+  return meetingRepository.deleteById(id);
+};
+
+/**
+ * Create new Meeting
+ */
 const create = async (newMeeting) => {
   const dbMeeting = dtoMeetingToDb(newMeeting);
   const createdMeeting = await meetingRepository.create(dbMeeting);
@@ -55,5 +62,6 @@ function dtoMeetingToDb(meeting) {
 module.exports = {
   findAll,
   getById,
-  create
+  create,
+  deleteById
 };

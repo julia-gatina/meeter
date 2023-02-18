@@ -18,8 +18,16 @@ const create = (meeting) => {
   return Meeting.create(meeting).catch((e) => errorHandler(e));
 };
 
+/**
+ * Deletes a meeting by id
+ */
+const deleteById = (id) => {
+  return Meeting.destroy({ where: { id: id } }).catch((e) => errorHandler(e));
+};
+
 module.exports = {
   findAll,
   getById,
-  create
+  create,
+  deleteById
 };

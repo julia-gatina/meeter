@@ -158,5 +158,51 @@ module.exports = function () {
       });
   });
 
+  /**
+   * @openapi
+   * /api/meeting/{id}:
+   *  delete:
+   *     tags:
+   *     - Meetings
+   *     summary: Delete a Meeting
+   *     description: Delete a Meeting
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: Meeting id
+   *        required: true
+   *        schema:
+   *          type: string
+   *     responses:
+   *       204:
+   *        description: Success, no content
+   *       500:
+   *        description: Internal server error
+   *       404:
+   *        description: Not found
+   *       400:
+   *        description: invalid request no meeting ID in DELETE request
+   */
+  meetingRoutes.delete('/:id', function (req, res) {
+    const meetingId = req.params.id;
+    if (!meetingId) {
+      res.status(400).json({ error: 'invalid request: no meeting ID in DELETE request' });
+      return;
+    }
+
+    meetingService
+      .deleteById(meetingId)
+      .then((successfullyDeleted) => {
+        if (successfullyDeleted) {
+          res.status(204).end();
+        } else {
+          res.status(404).end();
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({ error: error.message });
+      });
+  });
+
   return meetingRoutes;
 };
