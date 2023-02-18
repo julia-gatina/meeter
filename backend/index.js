@@ -6,8 +6,15 @@ const express = require('express');
 const { log } = require('./tools/logger');
 const nodeLiquibase = require('node-liquibase');
 const swagger = require('./tools/swagger/swagger');
+const dbOrm = require('./models');
 
-// Liquibase configuration
+// DB Sequelize configuration
+dbOrm.sequelize
+  .authenticate()
+  .then(() => console.log('Sequelize is successfully initialized and connected to DB'))
+  .catch((err) => console.log('Error initializing Sequelize', err));
+
+// DB Liquibase configuration
 const myConfig = {
   ...nodeLiquibase.POSTGRESQL_DEFAULT_CONFIG,
   changeLogFile: './db/changelog.xml',
@@ -25,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// Swagger
+// API Swagger
 swagger.initialize(app, envVar.SERVER_PORT);
 
 // Routes
