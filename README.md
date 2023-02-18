@@ -9,14 +9,15 @@ Used technologies (Postgres, Express, React, Node).
 ```
 or installed locally (run on port 5430)
 https://www.postgresql.org/download/
-1. Create database:
+2. Create database:
 ```
 CREATE USER meeter WITH PASSWORD 'meeter';
 CREATE DATABASE meeter;
 GRANT ALL PRIVILEGES ON DATABASE meeter to meeter;
 ```
-2. Run Backend server as a NodeJs App, Frontend as React App
+3. Run Backend server as a NodeJs App, Frontend as React App
 
 ```
 npm run start:nodemon
 ```
+4. Swagger API Doc are available at http://localhost:{port}/api/docs
