@@ -1,0 +1,54 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+>
+
+  <changeSet author="jgatina" id="add-mentee-table">
+
+    <!-- mentee create table -->
+    <createTable tableName="mentee">
+      <column name="id" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="email" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="title" type="VARCHAR(255)">
+      </column>
+      <column name="company" type="VARCHAR(255)">
+      </column>
+      <column name="experience" type="INT">
+        <constraints nullable="false" />
+      </column>
+      <column name="expertise" type="TEXT" />
+    </createTable>
+
+    <!-- add test mentee data -->
+    <insert tableName="mentee">
+      <column name="id" value="d794aa23-aabc-4348-9fcb-21f4215cf988" />
+      <column name="name" value="John Doe" />
+      <column name="email" value="john.doe@meeter.com" />
+      <column name="title" value="Software Developer" />
+      <column name="company" value="Facebook" />
+      <column name="experience" value="4" />
+      <column name="expertise" value="Postgres, Express, React, Node" />
+    </insert>
+
+    <insert tableName="mentee">
+      <column name="id" value="080edab4-b7e8-44e1-bda4-fc4376d6dd94" />
+      <column name="name" value="Anna Brown" />
+      <column name="email" value="anna.brown@meeter.com" />
+      <column name="title" value="Project Manager" />
+      <column name="company" value="Tesla" />
+      <column name="experience" value="9" />
+      <column name="expertise" value="SCRUM, Agile, Software Architecture" />
+    </insert>
+
+  </changeSet>
+
+</databaseChangeLog>
