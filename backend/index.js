@@ -5,6 +5,7 @@ const envVar = require('./env-vars');
 const express = require('express');
 const { log } = require('./tools/logger');
 const nodeLiquibase = require('node-liquibase');
+const swagger = require('./tools/swagger/swagger');
 
 // Liquibase configuration
 const myConfig = {
@@ -23,6 +24,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+// Swagger
+swagger.initialize(app, envVar.SERVER_PORT);
 
 // Routes
 const meeterRoutes = require('./routes/meeter')();
