@@ -21,3 +21,11 @@ GRANT ALL PRIVILEGES ON DATABASE meeter to meeter;
 npm run start:nodemon
 ```
 4. Swagger API Doc are available at http://localhost:{port}/api/docs
+## View API calls executed in Swagger:
+[<img src="frontend/public/mentor_api.png">](https://watch.screencastify.com/v/sXpJrzGhPZD0ivcz74qa "Mentor APIs")
+
+[<img src="frontend/public/mentee_api.png">](https://watch.screencastify.com/v/mGVxp3pliyFvPg2xav1E "Mentee APIs")
+
+[<img src="frontend/public/meeting_api.png">](https://watch.screencastify.com/v/JJvbCKe5PotJshv8SqYR "Meeting APIs")
+
+
