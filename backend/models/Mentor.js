@@ -49,5 +49,13 @@ module.exports = (sequelize) => {
       timestamps: false
     }
   );
+
+  Mentor.associate = (models) => {
+    Mentor.hasMany(models['Meeting'], {
+      foreignKey: 'mentor_id',
+      as: 'meetings'
+    });
+  };
+
   return Mentor;
 };
