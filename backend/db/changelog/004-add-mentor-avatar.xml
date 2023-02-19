@@ -1,0 +1,31 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no" ?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+>
+
+  <changeSet author="jgatina" id="add-mentor-avatar">
+
+    <!-- add mentor avatar -->
+    <addColumn tableName="mentor">
+      <column name="avatar" type="VARCHAR" />
+    </addColumn>
+
+    <!-- add test data -->
+    <update tableName="mentor">
+      <column name="avatar" value="https://i.pravatar.cc/300?img=5" />
+      <where>id='f9613152-50db-4b3c-b9b2-e261efb486f3'</where>
+    </update>
+    <update tableName="mentor">
+      <column name="avatar" value="https://i.pravatar.cc/300?img=32" />
+      <where>id='ccb9f966-a7fd-4aff-b66b-ce99d98dce49'</where>
+    </update>
+    <update tableName="mentor">
+      <column name="avatar" value="https://i.pravatar.cc/300?img=34" />
+      <where>id='c8371c1f-6113-4df6-9e20-f0a556223122'</where>
+    </update>
+
+  </changeSet>
+
+</databaseChangeLog>

@@ -9,5 +9,6 @@
   <include file="db/changelog/001-populate-mentor-table.xml"/>
   <include file="db/changelog/002-add-mentee-table.xml"/>
   <include file="db/changelog/003-add-meeting-table.xml"/>
+  <include file="db/changelog/004-add-mentor-avatar.xml"/>
 
 </databaseChangeLog>

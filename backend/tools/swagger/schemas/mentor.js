@@ -14,6 +14,8 @@ module.exports = {
        *          type: string
        *        email:
        *          type: string
+       *        avatar:
+       *          type: string
        *        title:
        *          type: string
        *        company:
@@ -27,6 +29,7 @@ module.exports = {
        *        id: 'f9cddd3a-0e9e-4c9f-94d1-d99592b7cdae'
        *        name: 'Jane Doe'
        *        email: 'jane.doe@meeter.com'
+       *        avatar: 'https://i.pravatar.cc/300?img=34'
        *        title: 'CEO'
        *        company: 'Google'
        *        experience: 12

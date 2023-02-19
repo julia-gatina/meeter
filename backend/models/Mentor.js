@@ -24,6 +24,9 @@ module.exports = (sequelize) => {
           notEmpty: true
         }
       },
+      avatar: {
+        type: DataTypes.STRING
+      },
       title: {
         type: DataTypes.STRING
       },
