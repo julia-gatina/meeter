@@ -15,7 +15,9 @@ export function Mentor(props: MentorProps) {
   const mentor = props.mentor;
   const menteeId = props.menteeId;
 
-  const [meetingDate, setMeetingDate] = useState(new Date());
+  const initialTime = new Date();
+  initialTime.setMinutes(0);
+  const [meetingDate, setMeetingDate] = useState(initialTime);
 
   const filterPassedTime = (time: any) => {
     const currentDate = new Date();
@@ -106,6 +108,7 @@ export function Mentor(props: MentorProps) {
                 minTime={setHours(setMinutes(new Date(), 0), 9)}
                 maxTime={setHours(setMinutes(new Date(), 0), 18)}
                 showTimeSelect
+                startDate={null}
                 showTimeInput
                 filterTime={filterPassedTime}
                 dateFormat="MMMM d, yyyy h:mm aa"
