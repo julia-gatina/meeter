@@ -41,6 +41,12 @@ module.exports = (sequelize) => {
       foreignKey: 'mentee_id',
       as: 'mentee'
     });
+
+    Meeting.belongsTo(models['Mentor'], {
+      allowNull: false,
+      foreignKey: 'mentor_id',
+      as: 'mentor'
+    });
   };
 
   return Meeting;

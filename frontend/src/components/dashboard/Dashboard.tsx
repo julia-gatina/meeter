@@ -1,61 +1,99 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.scss";
 import { Navigation } from "../navbar/Navigation";
 import { Mentor } from "../mentor/Mentor";
+import { fetchAllMentors, fetchMentee } from "../../services/meeter.service";
+import { IMentor } from "../../models/mentor";
+import { MeetingTable } from "../meeting-table/MeetingTable";
+import { IMentee } from "../../models/mentee";
 
-const mentors = [
-  {
-    id: "f9613152-50db-4b3c-b9b2-e261efb486f3",
-    name: "Jona Moore",
-    email: "jona.moore@meeter.com",
-    avatar: "https://i.pravatar.cc/300?img=5",
-    title: "Chief Technology Officer",
-    company: "MetaLab",
-    experience: 20,
-    expertise:
-      "Strategic Development, Building Influence and Business Innovation",
-  },
-  {
-    id: "ccb9f966-a7fd-4aff-b66b-ce99d98dce49",
-    name: "Stephanie Redivo",
-    email: "stephanie.redivo@meeter.com",
-    avatar: "https://i.pravatar.cc/300?img=32",
-    title: "Diversity, Equity and Inclusion Lead",
-    company: "Translink",
-    experience: 15,
-    expertise:
-      "Inclusive Leadership, Public Speaking, Change Management and Data Analysis",
-  },
-  {
-    id: "c8371c1f-6113-4df6-9e20-f0a556223122",
-    name: "Sonia Singh",
-    email: "sonia.singh@meeter.com",
-    avatar: "https://i.pravatar.cc/300?img=34",
-    title: "Senior Account Executive",
-    company: "Amazon Web Services",
-    experience: 12,
-    expertise:
-      "Tech Advancement, Skills Development, Stepping into Leadership and Business Communications",
-  },
-];
-const mentee = {
-  id: "d794aa23-aabc-4348-9fcb-21f4215cf988",
-  name: "John Doe",
-  email: "john.doe@meeter.com",
-  title: "Software Developer",
-  company: "Facebook",
-  experience: 4,
-  expertise: "Postgres, Express, React, Node",
-};
+/**
+ * For DEMO purposes we will not get Mentee ID
+ * from the Login operation (as usual) but
+ * it will be hardcoded in constant here.
+ */
+const CURRENT_MENTEE_ID = "080edab4-b7e8-44e1-bda4-fc4376d6dd94";
 
 export function Dashboard() {
+  const [mentee, setMentee] = useState<IMentee>({} as IMentee);
+  const [mentors, setMentors] = useState<IMentor[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  /**
+   * Fetch all Mentors.
+   *
+   * Fetch mentee details.
+   *
+   */
+  const fetchData = (): void => {
+    setLoading(true);
+
+    const mentorsPromise = fetchAllMentors();
+    const menteePromise = fetchMentee(CURRENT_MENTEE_ID);
+    Promise.all([mentorsPromise, menteePromise])
+      .then(([mentorsResponse, menteeResponse]) => {
+        setLoading(false);
+        setMentors(mentorsResponse.data);
+        setMentee(menteeResponse.data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("Error fetching mentors.", error);
+      });
+  };
+
+  const refreshMentee = (): void => {
+    setLoading(true);
+
+    fetchMentee(CURRENT_MENTEE_ID)
+      .then((menteeResponse) => {
+        setLoading(false);
+        setMentee(menteeResponse.data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("Error fetching mentee.", error);
+      });
+  };
+
+  /* Hook: onInit */
+  useEffect(fetchData, []);
+
   return (
     <div>
       <Navigation mentee={mentee}></Navigation>
-      <div className="container">
-        <h2>Select Mentor</h2>
-        <Mentor mentor={mentors[0]}></Mentor>
-        <Mentor mentor={mentors[1]}></Mentor>
+
+      <div className="container-fluid mt-3">
+        {loading && (
+          <div className="row">
+            <div className="col">
+              <h2 className="my-3">Loading data ...</h2>
+            </div>
+          </div>
+        )}
+        {!loading && (
+          <div className="row">
+            <div className="col-12 col-lg-5">
+              <h2 className="my-3">Find Mentor</h2>
+
+              {mentors.map((mentor) => (
+                <Mentor
+                  mentor={mentor}
+                  menteeId={mentee.id}
+                  key={mentor.id}
+                  onMeetingCreate={refreshMentee}
+                />
+              ))}
+            </div>
+            <div className="col-12 col-lg-7">
+              <h2 className="my-3">Booked Meetings</h2>
+              <MeetingTable
+                meetings={mentee.meetings}
+                onDelete={refreshMentee}
+              ></MeetingTable>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

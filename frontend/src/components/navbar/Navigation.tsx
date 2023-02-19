@@ -1,6 +1,7 @@
 import React from "react";
 import "./Navigation.scss";
 import { IMentee } from "../../models/mentee";
+import { Link } from "react-router-dom";
 
 interface MenteeProps {
   mentee: IMentee;
@@ -10,10 +11,7 @@ export function Navigation(props: MenteeProps) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <a
-          className="navbar-brand"
-          href="src/components/dashboard/navbar/Navigation#"
-        >
+        <a className="navbar-brand" href="#">
           Meeter Dashboard
         </a>
         <button
@@ -30,26 +28,19 @@ export function Navigation(props: MenteeProps) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="src/components/dashboard/navbar/Navigation#"
-              >
+              <a className="nav-link active" aria-current="page" href="#">
                 Mentors
               </a>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link"
-                href="src/components/dashboard/navbar/Navigation#"
-              >
+              <a className="nav-link" href="#">
                 My Profile
               </a>
             </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="src/components/dashboard/navbar/Navigation#"
+                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -59,18 +50,12 @@ export function Navigation(props: MenteeProps) {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a
-                    className="dropdown-item"
-                    href="src/components/dashboard/navbar/Navigation#"
-                  >
+                  <a className="dropdown-item" href="#">
                     Mentee reviews
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
-                    href="src/components/dashboard/navbar/Navigation#"
-                  >
+                  <a className="dropdown-item" href="#">
                     About Us
                   </a>
                 </li>
@@ -78,21 +63,14 @@ export function Navigation(props: MenteeProps) {
                   <hr className="dropdown-divider"></hr>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
-                    href="src/components/dashboard/navbar/Navigation#"
-                  >
+                  <a className="dropdown-item" href="#">
                     Courses
                   </a>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link"
-                href="src/components/dashboard/navbar/Navigation#"
-                aria-disabled="true"
-              >
+              <a className="nav-link" href="#" aria-disabled="true">
                 Contact Us
               </a>
             </li>
@@ -101,9 +79,9 @@ export function Navigation(props: MenteeProps) {
             <div className="nav-item mentee-name" title={props.mentee.email}>
               Logged in as - {props.mentee.name}
             </div>
-            <button className="btn btn-outline-danger" type="submit">
+            <Link to="/" className="btn btn-outline-danger">
               Logout
-            </button>
+            </Link>
           </div>
         </div>
       </div>

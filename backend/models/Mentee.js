@@ -49,7 +49,8 @@ module.exports = (sequelize) => {
 
   Mentee.associate = (models) => {
     Mentee.hasMany(models['Meeting'], {
-      foreignKey: 'mentee_id'
+      foreignKey: 'mentee_id',
+      as: 'meetings'
     });
   };
 
