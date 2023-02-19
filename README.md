@@ -33,24 +33,29 @@ _**Use a CTRL+click (on Windows and Linux) or CMD+click (on MacOS) to open video
 
 #### Login Page:
 Demo user login without authentication
+
 ![Login Page](assets/login.png)
 
 #### Dashboard Page:
 Upon logging in user gets redirected to the Dashboard where he can book an appointment with a Mentor
+
 ![Login Page](assets/dashboard.png)
 
 #### Book A Meeting with Mentor:
 The modal form to book a meeting with specific Mentor
+
 ![Login Page](assets/book_meeting.png)
 
 
 #### Select Date and Time for Your Meeting:
 User can select an available weekday and a timeslot for booking a meeting.
 After clicking Book a Meeting button, the new meeting will be added to the table on the Dashboard
+
 ![Login Page](assets/select_date.png)
 
 #### Cancel Your Meeting
 User can cancel a meeting clicking on the Cancel button, the meeting will disappear form the table.
+
 ![Login Page](assets/cancel_meeting.png)
 
 ## View API calls executed in Swagger:
