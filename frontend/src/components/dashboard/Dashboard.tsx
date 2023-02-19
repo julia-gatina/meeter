@@ -49,7 +49,7 @@ export function Dashboard() {
     <div>
       <Navigation mentee={mentee}></Navigation>
 
-      <div className="container">
+      <div className="container-fluid mt-3">
         {loading && (
           <div className="row">
             <div className="col">
@@ -59,14 +59,14 @@ export function Dashboard() {
         )}
         {!loading && (
           <div className="row">
-            <div className="col-6">
+            <div className="col-12 col-lg-5">
               <h2 className="my-3">Find Mentor</h2>
 
               {mentors.map((mentor) => (
                 <Mentor mentor={mentor} key={mentor.id} />
               ))}
             </div>
-            <div className="col-6">
+            <div className="col-12 col-lg-7">
               <h2 className="my-3">Booked Meetings</h2>
               <MeetingTable meetings={mentee.meetings}></MeetingTable>
             </div>
