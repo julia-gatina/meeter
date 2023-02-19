@@ -85,11 +85,12 @@ export function Mentor(props: MentorProps) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body mx-2">
               {/* Content goes here */}
-              <label>Select date</label>
+              <h5>Select date & time</h5>
               <DatePicker
                 selected={meetingDate}
+                className="form-control"
                 onChange={onDatetimePicked}
                 filterDate={isWeekday}
                 minTime={setHours(setMinutes(new Date(), 0), 9)}
@@ -99,6 +100,13 @@ export function Mentor(props: MentorProps) {
                 filterTime={filterPassedTime}
                 dateFormat="MMMM d, yyyy h:mm aa"
               />
+              <h5 className="mt-4">Take Your Career To The Next Level</h5>
+              <p className="mt-3">
+                By applying to participate, you can instantly start taking
+                charge of your career path, increasing your leadership impact,
+                and building a community on a global platform designed to
+                connect, empower and advance women.
+              </p>
             </div>
             <div className="modal-footer">
               <button
@@ -109,7 +117,7 @@ export function Mentor(props: MentorProps) {
                 Close
               </button>
               <button type="button" className="btn btn-warning">
-                Save changes
+                Book a Meeting
               </button>
             </div>
           </div>
