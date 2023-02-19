@@ -6,6 +6,7 @@ import { deleteMeeting } from "../../services/meeter.service";
 
 interface MeetingTableProps {
   meetings: IMeeting[];
+  onDelete: () => void;
 }
 
 export function MeetingTable(props: MeetingTableProps) {
@@ -16,6 +17,7 @@ export function MeetingTable(props: MeetingTableProps) {
       .then((response) => {
         if (response.status === 204) {
           console.log("Meeting successfully deleted");
+          props.onDelete();
         } else {
           console.error("Error deleting meeting. Status: ", response.status);
         }

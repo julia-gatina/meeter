@@ -42,6 +42,20 @@ export function Dashboard() {
       });
   };
 
+  const refreshMentee = (): void => {
+    setLoading(true);
+
+    fetchMentee(CURRENT_MENTEE_ID)
+      .then((menteeResponse) => {
+        setLoading(false);
+        setMentee(menteeResponse.data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("Error fetching mentee.", error);
+      });
+  };
+
   /* Hook: onInit */
   useEffect(fetchData, []);
 
@@ -63,12 +77,20 @@ export function Dashboard() {
               <h2 className="my-3">Find Mentor</h2>
 
               {mentors.map((mentor) => (
-                <Mentor mentor={mentor} menteeId={mentee.id} key={mentor.id} />
+                <Mentor
+                  mentor={mentor}
+                  menteeId={mentee.id}
+                  key={mentor.id}
+                  onMeetingCreate={refreshMentee}
+                />
               ))}
             </div>
             <div className="col-12 col-lg-7">
               <h2 className="my-3">Booked Meetings</h2>
-              <MeetingTable meetings={mentee.meetings}></MeetingTable>
+              <MeetingTable
+                meetings={mentee.meetings}
+                onDelete={refreshMentee}
+              ></MeetingTable>
             </div>
           </div>
         )}

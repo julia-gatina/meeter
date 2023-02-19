@@ -8,6 +8,7 @@ import { createMeeting } from "../../services/meeter.service";
 interface MentorProps {
   mentor: IMentor;
   menteeId: string;
+  onMeetingCreate: () => void;
 }
 
 export function Mentor(props: MentorProps) {
@@ -35,6 +36,7 @@ export function Mentor(props: MentorProps) {
     createMeeting(mentor.id, menteeId, meetingDate)
       .then((meeting) => {
         console.log("New meeting successfully created", meeting);
+        props.onMeetingCreate();
       })
       .catch((e) => console.error("Error creating meeting", e));
   };
@@ -72,23 +74,20 @@ export function Mentor(props: MentorProps) {
         type="button"
         className="btn btn-warning"
         data-bs-toggle="modal"
-        data-bs-target="#bookMeetingModal"
+        data-bs-target={"#bookMeetingModal" + mentor.id}
       >
         Book a meeting with {mentor.name}
       </button>
 
       <div
         className="modal fade"
-        id="bookMeetingModal"
-        aria-labelledby="bookMeetingModalLabel"
+        id={"bookMeetingModal" + mentor.id}
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="bookMeetingModalLabel">
-                Book a meeting with {mentor.name}
-              </h5>
+              <h5 className="modal-title">Book a meeting with {mentor.name}</h5>
               <button
                 type="button"
                 className="btn-close"
