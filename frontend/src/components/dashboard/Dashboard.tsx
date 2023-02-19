@@ -63,7 +63,7 @@ export function Dashboard() {
     <div>
       <Navigation mentee={mentee}></Navigation>
 
-      <div className="container-fluid mt-3">
+      <div className="container-fluid mt-3 mx-3">
         {loading && (
           <div className="row">
             <div className="col">
