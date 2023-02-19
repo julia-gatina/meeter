@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Mentor.scss";
 import { IMentor } from "../../models/mentor";
+import DatePicker from "react-datepicker";
+import { getDay, setHours, setMinutes } from "date-fns";
 
 interface MentorProps {
   mentor: IMentor;
 }
 
 export function Mentor(props: MentorProps) {
+  const [meetingDate, setMeetingDate] = useState(new Date());
+
+  const filterPassedTime = (time: any) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(time);
+    return currentDate.getTime() < selectedDate.getTime();
+  };
+
+  const isWeekday = (date: any) => {
+    const day = getDay(date);
+    return day !== 0 && day !== 6;
+  };
+
+  const onDatetimePicked = (datetime: any) => {
+    setMeetingDate(datetime);
+  };
+
   const mentor = props.mentor;
 
   return (
@@ -68,7 +87,18 @@ export function Mentor(props: MentorProps) {
             </div>
             <div className="modal-body">
               {/* Content goes here */}
-              Select date
+              <label>Select date</label>
+              <DatePicker
+                selected={meetingDate}
+                onChange={onDatetimePicked}
+                filterDate={isWeekday}
+                minTime={setHours(setMinutes(new Date(), 0), 9)}
+                maxTime={setHours(setMinutes(new Date(), 0), 18)}
+                showTimeSelect
+                showTimeInput
+                filterTime={filterPassedTime}
+                dateFormat="MMMM d, yyyy h:mm aa"
+              />
             </div>
             <div className="modal-footer">
               <button
