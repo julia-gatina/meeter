@@ -3,12 +3,17 @@ import "./Mentor.scss";
 import { IMentor } from "../../models/mentor";
 import DatePicker from "react-datepicker";
 import { getDay, setHours, setMinutes } from "date-fns";
+import { createMeeting } from "../../services/meeter.service";
 
 interface MentorProps {
   mentor: IMentor;
+  menteeId: string;
 }
 
 export function Mentor(props: MentorProps) {
+  const mentor = props.mentor;
+  const menteeId = props.menteeId;
+
   const [meetingDate, setMeetingDate] = useState(new Date());
 
   const filterPassedTime = (time: any) => {
@@ -26,7 +31,13 @@ export function Mentor(props: MentorProps) {
     setMeetingDate(datetime);
   };
 
-  const mentor = props.mentor;
+  const onCreateMeeting = () => {
+    createMeeting(mentor.id, menteeId, meetingDate)
+      .then((meeting) => {
+        console.log("New meeting successfully created", meeting);
+      })
+      .catch((e) => console.error("Error creating meeting", e));
+  };
 
   return (
     <div className="card mb-4">
@@ -116,7 +127,12 @@ export function Mentor(props: MentorProps) {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-warning">
+              <button
+                type="button"
+                className="btn btn-warning"
+                data-bs-dismiss="modal"
+                onClick={onCreateMeeting}
+              >
                 Book a Meeting
               </button>
             </div>

@@ -63,7 +63,7 @@ export function Dashboard() {
               <h2 className="my-3">Find Mentor</h2>
 
               {mentors.map((mentor) => (
-                <Mentor mentor={mentor} key={mentor.id} />
+                <Mentor mentor={mentor} menteeId={mentee.id} key={mentor.id} />
               ))}
             </div>
             <div className="col-12 col-lg-7">

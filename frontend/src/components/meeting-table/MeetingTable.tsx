@@ -27,12 +27,14 @@ export function MeetingTable(props: MeetingTableProps) {
             <th scope="row">{index + 1}</th>
             <td>{meeting.mentor?.name}</td>
             <td>
-              <Moment format="MMM Do, YYYY : h:mma">
+              <Moment format="MMM Do, YYYY : h:mma" subtract={{ hours: 8 }}>
                 {meeting.appointment}
               </Moment>
             </td>
             <td>
-              <Moment fromNow>{meeting.created_at}</Moment>
+              <Moment fromNow subtract={{ hours: 8 }}>
+                {meeting.created_at}
+              </Moment>
             </td>
             <td>
               <button
@@ -70,7 +72,10 @@ export function MeetingTable(props: MeetingTableProps) {
                       </h6>
                       <p className="mt-3">
                         Time:{" "}
-                        <Moment format="MMM Do, YYYY : h:mma">
+                        <Moment
+                          format="MMM Do, YYYY : h:mma"
+                          subtract={{ hours: 8 }}
+                        >
                           {meeting.appointment}
                         </Moment>
                       </p>
