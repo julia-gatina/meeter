@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./MeetingTable.scss";
 import { IMeeting } from "../../models/meeting";
 import Moment from "react-moment";
@@ -35,7 +35,61 @@ export function MeetingTable(props: MeetingTableProps) {
               <Moment fromNow>{meeting.created_at}</Moment>
             </td>
             <td>
-              <button className="btn btn-danger">Cancel</button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#cancelMeetingModal"
+              >
+                Cancel
+              </button>
+
+              <div
+                className="modal fade"
+                id="cancelMeetingModal"
+                aria-labelledby="cancelMeetingModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="bookMeetingModalLabel">
+                        Cancel Meeting
+                      </h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div className="modal-body mx-2">
+                      <h6 className="mt-2">
+                        Confirm canceling your meeting with{" "}
+                        {meeting.mentor?.name}
+                      </h6>
+                      <p className="mt-3">
+                        Time:{" "}
+                        <Moment format="MMM Do, YYYY : h:mma">
+                          {meeting.appointment}
+                        </Moment>
+                      </p>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="button" className="btn btn-danger">
+                        Cancel Meeting
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         ))}
