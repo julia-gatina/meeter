@@ -17,15 +17,17 @@ const mentee = {
 
 export function Dashboard() {
   const [mentors, setMentors] = useState<IMentor[]>([]);
+  const [loading, setLoading] = useState(false);
 
   function fetchData() {
-    console.log("fetchData");
-
+    setLoading(true);
     fetchAllMentors()
       .then((success) => {
+        setLoading(false);
         setMentors(success.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log("Error fetching mentors.", error);
       });
   }
@@ -37,11 +39,16 @@ export function Dashboard() {
       <Navigation mentee={mentee}></Navigation>
 
       <div className="container">
-        <h2 className="my-3">Find Mentor</h2>
+        {loading && <h2 className="my-3">Loading data ...</h2>}
+        {!loading && (
+          <div>
+            <h2 className="my-3">Find Mentor</h2>
 
-        {mentors.map((mentor) => (
-          <Mentor mentor={mentor} key={mentor.id} />
-        ))}
+            {mentors.map((mentor) => (
+              <Mentor mentor={mentor} key={mentor.id} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
