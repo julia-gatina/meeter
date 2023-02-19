@@ -1,12 +1,16 @@
 import React from "react";
 import "./App.scss";
-import { Dashboard } from "./components/dashboard/Dashboard";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { DashboardPage } from "./pages/DashboardPage";
+import { LoginPage } from "./pages/LoginPage";
 
 function App() {
   return (
-    <div>
-      <Dashboard></Dashboard>
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="*" element={<Navigate to="login" replace />} />
+    </Routes>
   );
 }
 
