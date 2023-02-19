@@ -4,6 +4,7 @@ import { Navigation } from "../navbar/Navigation";
 import { Mentor } from "../mentor/Mentor";
 import { fetchAllMentors } from "../../services/meeter.service";
 import { IMentor } from "../../models/mentor";
+import { MeetingTable } from "../meeting-table/MeetingTable";
 
 const mentee = {
   id: "d794aa23-aabc-4348-9fcb-21f4215cf988",
@@ -19,7 +20,7 @@ export function Dashboard() {
   const [mentors, setMentors] = useState<IMentor[]>([]);
   const [loading, setLoading] = useState(false);
 
-  function fetchData() {
+  const fetchData = (): void => {
     setLoading(true);
     fetchAllMentors()
       .then((success) => {
@@ -30,8 +31,9 @@ export function Dashboard() {
         setLoading(false);
         console.log("Error fetching mentors.", error);
       });
-  }
+  };
 
+  /* Hook: onInit */
   useEffect(fetchData, []);
 
   return (
@@ -39,14 +41,26 @@ export function Dashboard() {
       <Navigation mentee={mentee}></Navigation>
 
       <div className="container">
-        {loading && <h2 className="my-3">Loading data ...</h2>}
+        {loading && (
+          <div className="row">
+            <div className="col">
+              <h2 className="my-3">Loading data ...</h2>
+            </div>
+          </div>
+        )}
         {!loading && (
-          <div>
-            <h2 className="my-3">Find Mentor</h2>
+          <div className="row">
+            <div className="col-6">
+              <h2 className="my-3">Find Mentor</h2>
 
-            {mentors.map((mentor) => (
-              <Mentor mentor={mentor} key={mentor.id} />
-            ))}
+              {mentors.map((mentor) => (
+                <Mentor mentor={mentor} key={mentor.id} />
+              ))}
+            </div>
+            <div className="col-6">
+              <h2 className="my-3">Booked Meetings</h2>
+              <MeetingTable></MeetingTable>
+            </div>
           </div>
         )}
       </div>
