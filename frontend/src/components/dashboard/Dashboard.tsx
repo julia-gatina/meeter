@@ -68,7 +68,7 @@ export function Dashboard() {
             </div>
             <div className="col-6">
               <h2 className="my-3">Booked Meetings</h2>
-              <MeetingTable></MeetingTable>
+              <MeetingTable meetings={mentee.meetings}></MeetingTable>
             </div>
           </div>
         )}
