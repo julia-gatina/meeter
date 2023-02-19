@@ -30,3 +30,10 @@ export const createMeeting = (
   };
   return axios.post<IMeeting>(url, payload);
 };
+
+export const deleteMeeting = (
+  meetingId: string
+): Promise<AxiosResponse<void>> => {
+  const url = `${baseUrl}/meeting/${meetingId}`;
+  return axios.delete<void>(url);
+};
