@@ -27,6 +27,8 @@ npm run start
 4. Swagger API Doc are available at http://localhost:{port}/api/docs
 
 ## View Meeter App demo video
+_**Use a CTRL+click (on Windows and Linux) or CMD+click (on MacOS) to open video in the new tab._**
+
 [<img src="assets/demo_video.png">](https://watch.screencastify.com/v/KOaLXR9Ffsl4moY9RI7Z "Meeter Demo Video")
 
 #### Login Page:
