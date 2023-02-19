@@ -2,30 +2,39 @@ import React, { useEffect, useState } from "react";
 import "./Dashboard.scss";
 import { Navigation } from "../navbar/Navigation";
 import { Mentor } from "../mentor/Mentor";
-import { fetchAllMentors } from "../../services/meeter.service";
+import { fetchAllMentors, fetchMentee } from "../../services/meeter.service";
 import { IMentor } from "../../models/mentor";
 import { MeetingTable } from "../meeting-table/MeetingTable";
+import { IMentee } from "../../models/mentee";
 
-const mentee = {
-  id: "d794aa23-aabc-4348-9fcb-21f4215cf988",
-  name: "John Doe",
-  email: "john.doe@meeter.com",
-  title: "Software Developer",
-  company: "Facebook",
-  experience: 4,
-  expertise: "Postgres, Express, React, Node",
-};
+/**
+ * For DEMO purposes we will not get Mentee ID
+ * from the Login operation (as usual) but
+ * it will be hardcoded in constant here.
+ */
+const CURRENT_MENTEE_ID = "080edab4-b7e8-44e1-bda4-fc4376d6dd94";
 
 export function Dashboard() {
+  const [mentee, setMentee] = useState<IMentee>({} as IMentee);
   const [mentors, setMentors] = useState<IMentor[]>([]);
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Fetch all Mentors.
+   *
+   * Fetch mentee details.
+   *
+   */
   const fetchData = (): void => {
     setLoading(true);
-    fetchAllMentors()
-      .then((success) => {
+
+    const mentorsPromise = fetchAllMentors();
+    const menteePromise = fetchMentee(CURRENT_MENTEE_ID);
+    Promise.all([mentorsPromise, menteePromise])
+      .then(([mentorsResponse, menteeResponse]) => {
         setLoading(false);
-        setMentors(success.data);
+        setMentors(mentorsResponse.data);
+        setMentee(menteeResponse.data);
       })
       .catch((error) => {
         setLoading(false);
